@@ -1,12 +1,10 @@
 import requests
 
-from instagram_token_generator import InstagramTokenGenerator
+from instagram_token_generator import InstagramBasicTokenGenerator
 
 class InstagramSearch():
-    TOKEN_GENERATOR = InstagramTokenGenerator()
-    ACCESS_TOKEN = "IGQWRNSHYxSHNhTzlmTmx0cTRNMWdaazV2Skt4cUYxOEMtUEJibXE1MFdvVWlycngyVjU5ZAURsX1dsTjZADMGRTSzhQREpqcTZA2Mnl6X280ZAFpUTnpFdnU4NVV2b1oyQ05oRld2cjRyVjRGQQZDZD"
+    TOKEN_GENERATOR = InstagramBasicTokenGenerator()
     EXISTING_HASHTAG_DICT = {}
-    USER_ID = "10104352665136583"
 
     def retrieve_hashtag_id(self, term) -> str:
         if self.lookup_existing_hashtag_dict(term):
@@ -33,9 +31,9 @@ class InstagramSearch():
         request = requests.get(
             url = "https://graph.facebook.com/v18.0/ig_hashtag_search",
             params = {
-                "user_id" : InstagramSearch.USER_ID,
+                "user_id" : InstagramSearch.TOKEN_GENERATOR.USER_ID_NUM,
                 "q" : term,
-                "access_token" : InstagramSearch.ACCESS_TOKEN,
+                "access_token" : "EABhUnLscUK8BOwz56zTJw157bKp6KL8ZAVNByDNsNsE4WbJQ29coKT3LhRNjKLj2CExbLBUGJ5iSxqersZAfP20RpAzC3NPNP6mWZAKQMrXqX7h8UYyhwKl3J4sVen0ObC6V5fE7pki3cxypGJ1mfb4lQ04G7bACp9xj7bDx8otKEvQLB33k47B6b3CZAWXXRefAoWrZCHUkTPYUZD",
             }
         )
         print(request.url)
